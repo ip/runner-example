@@ -20,12 +20,13 @@ public class Boulder : MonoBehaviour {
     }
 
     void Update() {
-        _cursor.Step(Time.deltaTime * speed);
+        _cursor.distance += Time.deltaTime * speed;
+
         _Roll();
     }
 
     private void _Roll() {
-        float angle = _cursor.totalDistance * 360 / (2 * Mathf.PI * radius);
+        float angle = _cursor.distance * 360 / (2 * Mathf.PI * radius);
         _transform.localEulerAngles = new Vector3(angle, 0, 0);
     }
 }

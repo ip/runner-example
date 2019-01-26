@@ -35,10 +35,11 @@ public class DistanceOnPath : MonoBehaviour {
         var ray = new Ray(position, direction);
         float startDistance, endDistance;
         startPlane.Raycast(ray, out startDistance);
-        Debug.Assert(startDistance < 0);
-        startDistance *= -1;
         endPlane.Raycast(ray, out endDistance);
-        Debug.Assert(endDistance > 0);
+        // Debug.Assert(startDistance < 0);
+        // Debug.Assert(endDistance > 0);
+        startDistance = Mathf.Abs(startDistance);
+        endDistance = Mathf.Abs(endDistance);
 
         float offsetFactor = startDistance / (startDistance + endDistance);
         var offsetLength = _path.GetSegmentLength(_segmentIndex) * offsetFactor;
