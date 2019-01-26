@@ -10,11 +10,18 @@ public class LevelPath : MonoBehaviour {
 
     public Vector3[] positions;
     public Vector3[] normals;
+    public float[] distances;
     public int debugDrawPointIndex = 0;
+    public int PointCount => positions.Length;
 
     void Awake() {
         instance = this;
-        _GetVertices();
+
+        var mesh = GetComponent<MeshFilter>().mesh;
+
+        _GetPoints(mesh);
+        _CalculateNormals();
+        _CalculateDistances();
     }
 
     // void Update() {
@@ -26,12 +33,17 @@ public class LevelPath : MonoBehaviour {
             GetDirection(index - 1) :
             (positions[index + 1] - positions[index]).normalized;
 
-    private void _GetVertices() {
-        var mesh = GetComponent<MeshFilter>().mesh;
-
-        _GetPoints(mesh);
-        _CalculateNormals();
+    public Plane GetSegmentPlane(int index) {
+        var plane = new Plane();
+        plane.SetNormalAndPosition(
+            inNormal: GetDirection(index),
+            inPoint: positions[index]
+        );
+        return plane;
     }
+
+    public float GetSegmentLength(int index) =>
+        (positions[index + 1] - positions[index]).magnitude;
 
     private void _GetPoints(Mesh mesh) {
         positions = mesh.vertices
@@ -64,6 +76,17 @@ public class LevelPath : MonoBehaviour {
         Vector3 position = positions[debugDrawPointIndex];
         Vector3 normal = normals[debugDrawPointIndex];
         Debug.DrawLine(position, position + normal, Color.red);
+    }
+
+    private void _CalculateDistances() {
+        distances = new float[PointCount];
+        float distance = 0;
+        distances[0] = 0;
+
+        for (int i = 1; i < PointCount; ++i) {
+            distance += GetSegmentLength(i - 1);
+            distances[i] = distance;
+        }
     }
 }
 
