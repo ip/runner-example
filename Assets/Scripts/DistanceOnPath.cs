@@ -8,12 +8,12 @@ namespace Runner {
 public class DistanceOnPath : MonoBehaviour {
     public float distance;
 
-    private LevelPath _path;
+    private LinearPath _path;
 
     private int _segmentIndex;
 
     void Start() {
-        _path = LevelPath.instance;
+        _path = LinearPath.instance;
     }
 
     void Update() {

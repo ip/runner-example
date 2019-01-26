@@ -14,10 +14,10 @@ public class PathCursor : MonoBehaviour {
 
     public float totalDistance;
 
-    private LevelPath _path;
+    private LinearPath _path;
 
     void Start() {
-        _path = LevelPath.instance;
+        _path = LinearPath.instance;
     }
 
     void Update() {

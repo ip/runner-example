@@ -5,8 +5,8 @@ using UnityEngine;
 
 namespace Runner {
 
-public class LevelPath : MonoBehaviour {
-    public static LevelPath instance;
+public class LinearPath : MonoBehaviour {
+    public static LinearPath instance;
 
     public Vector3[] positions;
     public Vector3[] normals;
