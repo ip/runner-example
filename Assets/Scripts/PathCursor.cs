@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Runner {
 
 // Moves along the path.
+[ExecuteInEditMode]
 public class PathCursor : MonoBehaviour {
     public float distance;
 

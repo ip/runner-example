@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Runner {
 
+[ExecuteInEditMode]
 public class LinearPath : MonoBehaviour {
     public static LinearPath instance;
 
@@ -17,7 +18,7 @@ public class LinearPath : MonoBehaviour {
     void Awake() {
         instance = this;
 
-        var mesh = GetComponent<MeshFilter>().mesh;
+        var mesh = GetComponent<MeshFilter>().sharedMesh;
 
         _GetPoints(mesh);
         _CalculateNormals();
