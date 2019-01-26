@@ -21,6 +21,11 @@ public class LevelPath : MonoBehaviour {
     //     _DebugDraw();
     // }
 
+    public Vector3 GetDirection(int index) =>
+        index == positions.Length - 1 ?
+            GetDirection(index - 1) :
+            (positions[index + 1] - positions[index]).normalized;
+
     private void _GetVertices() {
         var mesh = GetComponent<MeshFilter>().mesh;
 

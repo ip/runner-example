@@ -73,23 +73,18 @@ public class PathCursor : MonoBehaviour {
         );
     }
 
-    private Vector3 _GetDirection(int index) =>
-        index == _path.positions.Length - 1 ?
-            _GetDirection(index - 1) :
-            (_path.positions[index + 1] - _path.positions[index]).normalized;
-
     private Vector3 _GetInterpolatedDirection() {
         bool isLastPoint = currentIndex == _path.positions.Length - 1;
         if (isLastPoint) {
-            return _GetDirection(currentIndex);
+            return _path.GetDirection(currentIndex);
         }
 
         Vector3 currentPoint = _path.positions[currentIndex];
         Vector3 nextPoint = _path.positions[currentIndex + 1];
         float factor = offset / Vector3.Distance(currentPoint, nextPoint);
         return Vector3.Lerp(
-            _GetDirection(currentIndex),
-            _GetDirection(currentIndex + 1),
+            _path.GetDirection(currentIndex),
+            _path.GetDirection(currentIndex + 1),
             factor
         );
     }
