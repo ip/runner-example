@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Runner {
 
 public class Player : MonoBehaviour {
-    public float speed = 10;
+    public float moveSpeed = 30;
+    public float jumpSpeed = 30;
 
     private Rigidbody _rigidbody;
 
@@ -16,12 +17,21 @@ public class Player : MonoBehaviour {
 
     void FixedUpdate() {
         _Move();
+        _Jump();
     }
 
     private void _Move() {
         var velocity = _rigidbody.velocity;
-        velocity.x = Input.GetAxis("Vertical") * speed;
-        velocity.z = -Input.GetAxis("Horizontal") * speed;
+        velocity.x = Input.GetAxis("Vertical") * moveSpeed;
+        velocity.z = -Input.GetAxis("Horizontal") * moveSpeed;
+        _rigidbody.velocity = velocity;
+    }
+
+    private void _Jump() {
+        var velocity = _rigidbody.velocity;
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            velocity.y = jumpSpeed;
+        }
         _rigidbody.velocity = velocity;
     }
 }
