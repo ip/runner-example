@@ -60,11 +60,9 @@ public class PathCursor : MonoBehaviour {
     }
 
     private void _UpdateTransform() {
-        Vector3 currentPoint = _path.positions[currentIndex];
-        Vector3 nextPoint = _path.positions[currentIndex + 1];
-
-        Vector3 direction = (nextPoint - currentPoint).normalized;
-        transform.position = currentPoint + direction * offset;
+        Vector3 direction = _path.GetDirection(currentIndex);
+        transform.position = _path.positions[currentIndex]
+            + direction * offset;
 
         Vector3 directionInterpolated = _GetInterpolatedDirection();
         transform.LookAt(
