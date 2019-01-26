@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Runner {
 
-public class Player : MonoBehaviour {
+public class PlayerControls : MonoBehaviour {
     public float moveSpeed = 30;
     public float jumpSpeed = 30;
 
