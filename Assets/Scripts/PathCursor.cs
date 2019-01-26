@@ -22,13 +22,13 @@ public class PathCursor : MonoBehaviour {
     private void _Step(float distance) {
         float distanceLeft = distance;
         while (distanceLeft > 0) {
-            bool isLastPoint = _currentPoint == _path.points.Length - 1;
+            bool isLastPoint = _currentPoint == _path.positions.Length - 1;
             if (isLastPoint) {
                 return;
             }
 
-            Vector3 currentPoint = _path.points[_currentPoint];
-            Vector3 nextPoint = _path.points[_currentPoint + 1];
+            Vector3 currentPoint = _path.positions[_currentPoint];
+            Vector3 nextPoint = _path.positions[_currentPoint + 1];
             float distanceToNext =
                 Vector3.Distance(transform.position, nextPoint);
             if (distanceLeft > distanceToNext) {
