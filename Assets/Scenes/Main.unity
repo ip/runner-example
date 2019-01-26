@@ -739,6 +739,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 58c556901acdf4cdc9f603e26620e135, type: 3}
+--- !u!1 &1616438873 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 928d6c6524ef3436994d16e6001f6843,
+    type: 3}
+  m_PrefabInstance: {fileID: 936613080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1616438874
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616438873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1775429867
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,7 +942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c64a2fb55e064718a3d2e4edb1253d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  moveSpeed: 30
+  jumpSpeed: 30
 --- !u!1 &2042110998 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 58c556901acdf4cdc9f603e26620e135,
