@@ -6,10 +6,13 @@ using UnityEngine;
 namespace Runner {
 
 public class LevelPath : MonoBehaviour {
-    public Vector3[] _points;
+    public static LevelPath instance;
+
+    public Vector3[] points;
     public int debugDrawPointIndex = 0;
 
-    void Start() {
+    void Awake() {
+        instance = this;
         _RetrievePathPoints();
     }
 
@@ -20,13 +23,13 @@ public class LevelPath : MonoBehaviour {
     private void _RetrievePathPoints() {
         var mesh = GetComponent<MeshFilter>().mesh;
 
-        _points = mesh.vertices
+        points = mesh.vertices
             .Select(transform.TransformPoint)
             .ToArray();
     }
 
     private void _DebugDraw() {
-        Vector3 x = _points[debugDrawPointIndex];
+        Vector3 x = points[debugDrawPointIndex];
         Debug.DrawLine(x, x + Vector3.up, Color.red);
     }
 }

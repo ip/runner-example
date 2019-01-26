@@ -411,6 +411,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 928d6c6524ef3436994d16e6001f6843, type: 3}
+--- !u!1 &936613081 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 928d6c6524ef3436994d16e6001f6843,
+    type: 3}
+  m_PrefabInstance: {fileID: 936613080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &936613082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936613081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a521b57e290946ecb04916fbe9e869b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
 --- !u!1001 &1430886214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -826,7 +845,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f1a386a53d349929f73fc3a7748cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _points: []
+  points: []
   debugDrawPointIndex: 0
 --- !u!23 &1900404466
 MeshRenderer:
