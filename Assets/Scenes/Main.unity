@@ -845,8 +845,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08f1a386a53d349929f73fc3a7748cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: []
-  debugDrawPointIndex: 0
+  positions: []
+  normals: []
+  debugDrawPointIndex: 34
 --- !u!23 &1900404466
 MeshRenderer:
   m_ObjectHideFlags: 0
