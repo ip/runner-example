@@ -7,32 +7,21 @@ namespace Runner {
 // Moves along the path.
 public class PathCursor : MonoBehaviour {
     // Index of the current point
-    public int currentIndex {
-        get => _currentIndex;
-        set { _currentIndex = value; _isDirty = true; }
-    }
+    public int currentIndex;
 
     // Offset from the current point towards the next one
-    public float offset {
-        get => _offset;
-        set { _offset = value; _isDirty = true; }
-    }
+    public float offset;
+
+    public float totalDistance;
 
     private LevelPath _path;
-    private int _currentIndex;
-    private float _offset;
-    private bool _isDirty = true;
 
     void Start() {
         _path = LevelPath.instance;
     }
 
     void Update() {
-        if (_isDirty) {
-            _isDirty = false;
-
-            _UpdateTransform();
-        }
+        _UpdateTransform();
     }
 
     public void Step(float distance) {
@@ -47,15 +36,15 @@ public class PathCursor : MonoBehaviour {
             float distanceToNext =
                 Vector3.Distance(transform.position, nextPoint);
             if (distanceLeft > distanceToNext) {
+                totalDistance += distanceToNext;
                 distanceLeft -= distanceToNext;
                 offset = 0;
                 currentIndex++;
             } else {
+                totalDistance += distanceLeft;
                 offset += distanceLeft;
                 distanceLeft = 0;
             }
-
-            _isDirty = true;
         }
     }
 
