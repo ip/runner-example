@@ -12,7 +12,7 @@ public class LinearPath : MonoBehaviour {
     public Vector3[] positions;
     public Vector3[] normals;
     public float[] distances;
-    public int debugDrawPointIndex = 0;
+    public int debugDrawPointIndex = -1;
     public int PointCount => positions.Length;
 
     void Awake() {
@@ -25,9 +25,11 @@ public class LinearPath : MonoBehaviour {
         _CalculateDistances();
     }
 
-    // void Update() {
-    //     _DebugDraw();
-    // }
+    void Update() {
+        if (debugDrawPointIndex != -1) {
+            _DebugDraw();
+        }
+    }
 
     public Vector3 GetDirection(int index) =>
         index == positions.Length - 1 ?
@@ -49,6 +51,7 @@ public class LinearPath : MonoBehaviour {
     private void _GetPoints(Mesh mesh) {
         positions = mesh.vertices
             .Select(transform.TransformPoint)
+            .OrderBy((Vector3 position) => -position.x)
             .ToArray();
     }
 
