@@ -30,7 +30,7 @@ public class PlayerControls : MonoBehaviour {
     private void _Jump() {
         var velocity = _rigidbody.velocity;
         if (Input.GetKeyDown(KeyCode.Space)) {
-            velocity.y = jumpSpeed;
+            _rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
         }
         _rigidbody.velocity = velocity;
     }
