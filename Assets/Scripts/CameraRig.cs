@@ -24,7 +24,7 @@ public class CameraRig : MonoBehaviour {
         _totalDistance = LinearPath.instance.Length;
     }
 
-    void Update() {
+    void FixedUpdate() {
         float currentDistance = _distanceComponent.distance;
         float currentTime =
             currentDistance * animationDuration / _totalDistance;
