@@ -11,27 +11,42 @@ public class PlayerControls : MonoBehaviour {
 
     private Vector3 _moveSpeed = Vector3.zero;
     private CharacterController _controller;
+    private int _surfaceLayerMask;
 
     void Start() {
         _controller = GetComponent<CharacterController>();
         Debug.Assert(_controller != null);
+
+        _surfaceLayerMask = LayerMask.NameToLayer("Distance calculation");
     }
 
     void FixedUpdate() {
+        bool moveAlongSurface = false;
         if (_controller.isGrounded) {
             _moveSpeed = _CalculateMoveDirection();
             _moveSpeed *= speed;
 
-            if (Input.GetButtonDown("Jump")) {
+            bool shouldJump = Input.GetButtonDown("Jump");
+            moveAlongSurface = !shouldJump;
+            if (shouldJump) {
                 _moveSpeed.y = jumpSpeed;
             }
         }
 
-        // Apply gravity
-        _moveSpeed.y -= gravity * Time.fixedDeltaTime;
+        bool hasMovedAlongSurface = false;
+        if (moveAlongSurface) {
+            hasMovedAlongSurface = _MoveAlongSurface();
+        }
 
-        // Move the controller
-        _controller.Move(_moveSpeed * Time.fixedDeltaTime);
+        if (!hasMovedAlongSurface) {
+            // Move using CharacterController
+
+            // Apply gravity
+            _moveSpeed.y -= gravity * Time.fixedDeltaTime;
+
+            // Move the controller
+            _controller.Move(_moveSpeed * Time.fixedDeltaTime);
+        }
     }
 
     private Vector3 _CalculateMoveDirection() {
@@ -53,6 +68,33 @@ public class PlayerControls : MonoBehaviour {
         );
 
         return transformMat.MultiplyVector(direction);
+    }
+
+    // Returns true, if successfully moved and snapped to the surface.
+    private bool _MoveAlongSurface() {
+        Vector3 moveDelta = _moveSpeed * Time.fixedDeltaTime;
+
+        if (moveDelta.magnitude < 0.01f) {
+            return true;
+        }
+
+        // Distance from ground to player pivot
+        float playerOffset = 1.99f;
+        RaycastHit hitInfo;
+        bool rayIntersected = Physics.Raycast(
+            origin: transform.position + moveDelta,
+            direction: Vector3.down,
+            out hitInfo,
+            maxDistance: playerOffset + 1f,
+            layerMask: _surfaceLayerMask
+        );
+        if (!rayIntersected) {
+            return false;
+        }
+        Vector3 targetPosition = hitInfo.point + Vector3.up * playerOffset;
+        _controller.Move(targetPosition - transform.position);
+
+        return true;
     }
 }
 
