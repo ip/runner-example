@@ -20,7 +20,7 @@ public class PlayerControls : MonoBehaviour {
         _surfaceLayerMask = LayerMask.NameToLayer("Distance calculation");
     }
 
-    void FixedUpdate() {
+    void Update() {
         bool moveAlongSurface = false;
         if (_controller.isGrounded) {
             _moveSpeed = _CalculateMoveDirection();
@@ -42,10 +42,10 @@ public class PlayerControls : MonoBehaviour {
             // Move using CharacterController
 
             // Apply gravity
-            _moveSpeed.y -= gravity * Time.fixedDeltaTime;
+            _moveSpeed.y -= gravity * Time.deltaTime;
 
             // Move the controller
-            _controller.Move(_moveSpeed * Time.fixedDeltaTime);
+            _controller.Move(_moveSpeed * Time.deltaTime);
         }
     }
 
@@ -72,7 +72,7 @@ public class PlayerControls : MonoBehaviour {
 
     // Returns true, if successfully moved and snapped to the surface.
     private bool _MoveAlongSurface() {
-        Vector3 moveDelta = _moveSpeed * Time.fixedDeltaTime;
+        Vector3 moveDelta = _moveSpeed * Time.deltaTime;
 
         if (moveDelta.magnitude < 0.01f) {
             return true;
