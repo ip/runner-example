@@ -14,6 +14,7 @@ public class LinearPath : MonoBehaviour {
     public float[] distances;
     public int debugDrawPointIndex = -1;
     public int PointCount => positions.Length;
+    public float Length => distances[PointCount - 1];
 
     void Awake() {
         instance = this;
