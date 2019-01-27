@@ -234,8 +234,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24993750}
-  m_LocalRotation: {x: 0.022646809, y: -0.77890724, z: 0.028174194, w: 0.6260965}
-  m_LocalPosition: {x: 9.339893, y: 0, z: 0.14107022}
+  m_LocalRotation: {x: 0.024795532, y: -0.78626794, z: 0.031619586, w: 0.61657774}
+  m_LocalPosition: {x: 7.269928, y: 0, z: 0.12934078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 949024}
@@ -527,6 +527,7 @@ GameObject:
   m_Component:
   - component: {fileID: 387952297}
   - component: {fileID: 387952298}
+  - component: {fileID: 387952299}
   m_Layer: 0
   m_Name: Boulder dummy
   m_TagString: Untagged
@@ -541,8 +542,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 387952296}
-  m_LocalRotation: {x: 0.022646809, y: -0.77890724, z: 0.028174194, w: 0.6260965}
-  m_LocalPosition: {x: 9.339893, y: 0, z: 0.14107022}
+  m_LocalRotation: {x: 0.024795532, y: -0.78626794, z: 0.031619586, w: 0.61657774}
+  m_LocalPosition: {x: 7.269928, y: 0, z: 0.12934078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1678055644}
@@ -561,7 +562,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a521b57e290946ecb04916fbe9e869b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distance: 18.1
+  distance: 20.17
+--- !u!114 &387952299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 387952296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da4ca5eb6355b4c6ebcd4cdb8de3434d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  startAtDistance: 34.53464
+  animator: {fileID: 703352287}
 --- !u!43 &687681544
 Mesh:
   m_ObjectHideFlags: 0
@@ -815,7 +831,7 @@ GameObject:
   - component: {fileID: 703352288}
   - component: {fileID: 703352287}
   m_Layer: 0
-  m_Name: Boulder animation
+  m_Name: Boulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -912,8 +928,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244254850}
-  m_LocalRotation: {x: -0, y: -0.70910734, z: -0, w: 0.7051006}
-  m_LocalPosition: {x: 27.439604, y: 0, z: 0.243632}
+  m_LocalRotation: {x: 0.20283115, y: -0.58065957, z: 0.15223607, w: 0.7736396}
+  m_LocalPosition: {x: -102.832886, y: -27.428503, z: 21.891214}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1435882109}

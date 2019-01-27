@@ -25,7 +25,7 @@ public class DistanceOnPath : MonoBehaviour {
             direction: Vector3.down,
             out hitInfo,
             maxDistance: 200,
-            _layerMask
+            ~_layerMask
         );
         Vector3 position = hitInfo.point;
         _DrawPoint(position, Color.white);
