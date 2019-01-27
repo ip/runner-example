@@ -36,6 +36,17 @@ public class PlayerSpin : MonoBehaviour {
 
         _isSpinning = false;
     }
+
+    #region Crates destrucion
+
+    void OnTriggerStay(Collider other)
+    {
+        if (_isSpinning && other.gameObject.tag == "Crate") {
+            GameObject.Destroy(other.gameObject);
+        }
+    }
+
+    #endregion
 }
 
 }
