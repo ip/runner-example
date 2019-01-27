@@ -9,19 +9,23 @@ public class DistanceOnPath : MonoBehaviour {
     public float distance;
 
     private LinearPath _path;
-
     private int _segmentIndex;
+    private int _layerMask;
 
     void Start() {
         _path = LinearPath.instance;
+
+        _layerMask = LayerMask.NameToLayer("Distance calculation");
     }
 
     void Update() {
         RaycastHit hitInfo;
         Physics.Raycast(
-            origin: transform.position + Vector3.up,
+            origin: transform.position + Vector3.up * 100,
             direction: Vector3.down,
-            out hitInfo
+            out hitInfo,
+            maxDistance: 200,
+            _layerMask
         );
         Vector3 position = hitInfo.point;
         _DrawPoint(position, Color.white);
