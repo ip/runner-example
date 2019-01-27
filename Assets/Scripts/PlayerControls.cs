@@ -5,34 +5,57 @@ using UnityEngine;
 namespace Runner {
 
 public class PlayerControls : MonoBehaviour {
-    public float moveSpeed = 30;
-    public float jumpSpeed = 30;
+    public float speed = 6.0f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
 
-    private Rigidbody _rigidbody;
+    private Vector3 _moveSpeed = Vector3.zero;
+    private CharacterController _controller;
 
     void Start() {
-        _rigidbody = GetComponent<Rigidbody>();
-        Debug.Assert(_rigidbody != null);
+        _controller = GetComponent<CharacterController>();
+        Debug.Assert(_controller != null);
     }
 
-    void FixedUpdate() {
-        _Move();
-        _Jump();
-    }
+    void Update() {
+        if (_controller.isGrounded) {
+            _moveSpeed = _CalculateMoveDirection();
+            _moveSpeed *= speed;
 
-    private void _Move() {
-        var velocity = _rigidbody.velocity;
-        velocity.x = Input.GetAxis("Vertical") * moveSpeed;
-        velocity.z = -Input.GetAxis("Horizontal") * moveSpeed;
-        _rigidbody.velocity = velocity;
-    }
-
-    private void _Jump() {
-        var velocity = _rigidbody.velocity;
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            _rigidbody.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+            if (Input.GetButtonDown("Jump")) {
+                _moveSpeed.y = jumpSpeed;
+            }
         }
-        _rigidbody.velocity = velocity;
+
+        // Apply gravity
+        _moveSpeed.y -= gravity * Time.deltaTime;
+
+        // Move the controller
+        _controller.Move(_moveSpeed * Time.deltaTime);
+    }
+
+    private Vector3 _CalculateMoveDirection() {
+        var direction = new Vector3(
+            -Input.GetAxis("Horizontal"),
+            0.0f,
+            -Input.GetAxis("Vertical")
+        );
+
+        Vector3 cameraDirection = Camera.main.cameraToWorldMatrix
+            .MultiplyVector(Vector3.forward);
+        cameraDirection.y = 0;
+        cameraDirection.Normalize();
+
+        Debug.DrawLine(transform.position, transform.position + cameraDirection,
+            Color.red);
+
+        var transformMat = Matrix4x4.LookAt(
+            from: transform.position,
+            to: transform.position + cameraDirection,
+            up: Vector3.up
+        );
+
+        return transformMat.MultiplyVector(direction);
     }
 }
 
