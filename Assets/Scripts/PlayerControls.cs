@@ -17,7 +17,7 @@ public class PlayerControls : MonoBehaviour {
         Debug.Assert(_controller != null);
     }
 
-    void Update() {
+    void FixedUpdate() {
         if (_controller.isGrounded) {
             _moveSpeed = _CalculateMoveDirection();
             _moveSpeed *= speed;
@@ -28,10 +28,10 @@ public class PlayerControls : MonoBehaviour {
         }
 
         // Apply gravity
-        _moveSpeed.y -= gravity * Time.deltaTime;
+        _moveSpeed.y -= gravity * Time.fixedDeltaTime;
 
         // Move the controller
-        _controller.Move(_moveSpeed * Time.deltaTime);
+        _controller.Move(_moveSpeed * Time.fixedDeltaTime);
     }
 
     private Vector3 _CalculateMoveDirection() {
@@ -45,9 +45,6 @@ public class PlayerControls : MonoBehaviour {
             .MultiplyVector(Vector3.forward);
         cameraDirection.y = 0;
         cameraDirection.Normalize();
-
-        Debug.DrawLine(transform.position, transform.position + cameraDirection,
-            Color.red);
 
         var transformMat = Matrix4x4.LookAt(
             from: transform.position,
