@@ -12,10 +12,15 @@ public class PlayerControls : MonoBehaviour {
     private Vector3 _moveSpeed = Vector3.zero;
     private CharacterController _controller;
     private int _surfaceLayerMask;
+    private Animator _jumpAnimator;
 
     void Start() {
         _controller = GetComponent<CharacterController>();
         Debug.Assert(_controller != null);
+
+        _jumpAnimator = transform.GetComponent<Animator>();
+        Debug.Assert(_jumpAnimator != null);
+        _jumpAnimator.Play("Player jump", layer: 0, normalizedTime: 1);
 
         _surfaceLayerMask = LayerMask.NameToLayer("Distance calculation");
     }
@@ -30,6 +35,7 @@ public class PlayerControls : MonoBehaviour {
             moveAlongSurface = !shouldJump;
             if (shouldJump) {
                 _moveSpeed.y = jumpSpeed;
+                _PlayJumpAnimation();
             }
         }
 
@@ -95,6 +101,11 @@ public class PlayerControls : MonoBehaviour {
         _controller.Move(targetPosition - transform.position);
 
         return true;
+    }
+
+
+    private void _PlayJumpAnimation() {
+        _jumpAnimator.Play("Player jump", layer: 0, normalizedTime: 0);
     }
 }
 
